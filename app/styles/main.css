@@ -1,0 +1,86 @@
+.k-treeview .k-in
+ { color:#000000;
+   background-color: #ffffff;
+}
+
+.rcorners {
+  border-radius: 25px;
+  border: 2px solid ;
+  padding: 20px;
+  width: 15%;
+  height:auto;
+}
+
+
+/* highest priority */
+.Container {
+    padding: 0;
+    margin: 0;
+}
+
+.Container li {
+    list-style-type: none;
+}
+
+.Node {
+       /*background-image : url(images/t.gif);
+       background-repeat :no-repeat;
+       background-position : left;*/
+		margin-left: 10px;
+		zoom: 1;
+}
+
+.IsRoot {
+    margin-left: 0;
+}
+
+.IsLast {
+    background-image: url(images/i_half.gif);
+    background-repeat : no-repeat;
+}
+
+.ExpandOpen .Expand {
+    background-image: url(images/expand_minus.gif);
+}
+
+.ExpandClosed .Expand {
+    background-image: url(images/expand_plus.gif);
+}
+
+.ExpandLeaf .Expand {
+    background-image: url(images/expand_leaf.gif);
+}
+
+.Content {
+    min-height: 18px;
+    margin-left:18px;
+}
+
+.Expand {
+    width: 18px;
+    height: 18px;
+    float: left;
+}
+
+.ExpandLoading   {
+    width: 18px;
+    height: 18px;
+    float: left;
+    background-image: url(images/expand_loading.gif);
+}
+
+.ExpandOpen .Container {
+	display: block;
+}
+
+.ExpandClosed .Container {
+	display: none;
+}
+
+.ExpandOpen .Expand, .ExpandClosed .Expand {
+	cursor: pointer;
+}
+
+.ExpandLeaf .Expand {
+	cursor: auto;
+}

@@ -1,0 +1,12 @@
+<div id="example" ng-init="init()" >
+
+   <div class="demo-section k-content rcorners">
+        <div class="box-col">
+            <h4 align="center" >ATE</h4>
+            <div kendo-tree-view="tree" k-data-source="var.treeData" k-on-change="selectedItem = dataItem">
+                <span k-template ng-click='click(dataItem)'> {{dataItem.ate_name}} </span>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,14 @@
+<script type="text/ng-template"  id="tree_item_renderer.html">
+  <div class="Expand" ng-click="tree_toggle()" ></div>
+  <div class="Content" >{{data.name}}</div>
+  <ul  class = "Container">
+    <li class = "Node ExpandClosed" ng-style = "MyStyle" ng-repeat="data in data.nodes"  ng-include="'tree_item_renderer.html'"></li>
+  </ul>
+</script>
+
+<div>
+  <ul class="Container">
+    <li class = "IsRoot ExpandOpen" ng-repeat="data in tree" ng-include="'tree_item_renderer.html'"></li>
+  </ul>
+</div>
+
