@@ -1,12 +1,139 @@
 <div id="example" ng-init="init()" >
 
-   <div class="demo-section k-content rcorners">
-        <div class="box-col">
-            <h4 align="center" >ATE</h4>
-            <div kendo-tree-view="tree" k-data-source="var.treeData" k-on-change="selectedItem = dataItem">
-                <span k-template ng-click='click(dataItem)'> {{dataItem.ate_name}} </span>
-            </div>
+  <div class="row page-header form-group" >
+
+    <label class="control-label col-sm-2"> Адрес: </label>
+
+    <div class="col-sm-8"> <input type="text " class="form-control" placeholder="Адрес" ng-init="var.nameAte = ''" ng-model="var.curAte.ate_name" disabled/> </div>
+
+    <div class="col-sm-2"> <span class="input-group-btn"> <button class="btn btn-default form-control"  ng-click="searchAte(var.nameAte)"> Привязать </button> </span> </div>
+
+  </div>
+
+  <div class="row">
+
+   <div class="col-sm-1">
+
+       <ul class="nav" ng-model="AteForm" ng-init="AteForm=true">
+
+         <li><a href="" ng-click ="AteForm=false" > АТЕ </a></li>
+
+         <li><a href="" ng-click ="AteForm=true" > Улица </a></li>
+
+       </ul>
+
+     </div>
+
+
+    <!--ATE form-->
+
+   <div class = "container" ng-hide = "AteForm">
+
+     <!--Search ATE form block-->
+
+     <div class="well row container col-sm-7">
+
+       <div class="input-group">
+
+         <input type="text " class="form-control" placeholder="АТЕ search" ng-keyup=" $event.keyCode == 13 ?  searchAte(var.nameAte) : TabShow=false "  ng-init="var.nameAte = ''" ng-model="var.nameAte" />
+
+         <span class="input-group-btn"> <button class="btn btn-default"  ng-click="searchAte(var.nameAte)"> Поиск </button> </span>
+
+       </div>
+
+       <table class="table table-bordered" ng-hide="!TabShow">
+
+          <tr>
+
+            <th>Номер</th>
+
+            <th>АТЕ</th>
+
+            <th>SOATO</th>
+
+          </tr>
+
+          <tr ng-repeat="ate in var.ateDataSearch" class="btn-default" ng-click="bindAte(ate)">
+
+            <td >{{$index +1}}</td>
+
+            <td width="fit-content">{{ate.parent_ate}}</td>
+
+            <td width="fit-content">{{ate.soato}}</td>
+
+          </tr>
+
+        </table>
+
+     </div>
+
+      <!-----------------------End Ate form---------------------------->
+
+      <!----------------------Tree ATE form block---------------------->
+
+     <div class="well k-content col-sm-4">
+
+        <a href="" ng-click="cleanAte()"> <label> Вся Беларусь </label> </a>
+
+        <div kendo-tree-view="tree"  k-data-source="var.treeData" k-on-change="selectedItem = dataItem">
+
+          <span k-template ng-click='getAte(dataItem)'> {{dataItem.ate_name}}({{dataItem.soato}}) </span>
+
         </div>
-    </div>
+
+     </div>
+
+     <!------------------------End Tree---------------------------->
+
+   </div>
+
+
+    <!--Street form-->
+
+   <div class = "container" ng-hide = "!AteForm">
+
+     <div class="input-group row">
+
+       <div class="col-sm-4"> <input type="text" class="form-control" placeholder="Улица" ng-init="var.curStreet = ''" ng-model="var.curStreet" /> </div>
+
+       <div class="col-sm-2"> <input type="number" class="form-control" placeholder="Дом" ng-init="var.curHouse = ''" ng-model="var.curHouse" /> </div>
+
+       <div class="col-sm-2"> <input type="number" class="form-control " placeholder="Корпус" ng-init="var.curCorp = ''" ng-model="var.curCorp" /> </div>
+
+       <div class="col-sm-2"> <input type="number" class="form-control " placeholder="Квартира" ng-init="var.curRoom = ''" ng-model="var.curRoom" /> </div>
+
+       <span class="input-group-btn col-sm-5"> <button class="btn btn-default"  ng-click="searchStreet(var.nameAte)"> Поиск </button> </span>
+
+       <table class="table table-bordered">
+
+         <tr>
+
+           <th>Номер</th>
+
+           <th>Улица</th>
+
+           <th>Дом/Корпус-Кварта</th>
+
+         </tr>
+
+         <tr ng-repeat="ate in var.ateDataSearch" class="btn-default" ng-click="bindAte(ate)">
+
+           <td >{{$index +1}}</td>
+
+           <td width="fit-content">{{ate.parent_ate}}</td>
+           <td width="fit-content">{{ate.soato}}</td>
+
+         </tr>
+
+       </table>
+
+     </div>
+
+
+   </div>
+
+  </div>
 
 </div>
+
+

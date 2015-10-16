@@ -15,7 +15,7 @@ var app = angular.module('treeViewApp', [
     'ngRoute',
     'ngSanitize',
     'ngTouch',
-	'kendo.directives'
+	  'kendo.directives'
     ])
 	.constant('DOMAIN', "" + window.location.protocol + '//'+ window.location.hostname+":8080")
     .config(function ($routeProvider, $httpProvider) {
