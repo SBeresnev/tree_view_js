@@ -1,38 +1,30 @@
-
-<div class="container" ng-init="init()">
-
-<div id="window" ></div>
-
-
-  <div kendo-window="window_" k-visible="false" k-modal="true" k-on-close="closeAddress()" k-content="{url: '{{url_}}'}"> </div>
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
 
 
-  <a id="page-help" href="#/main" onclick="window.open(this.href, 'popupwindow', 'width=1300,height=500,modal=yes'); return false;">what is this?</a>
+  <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2014.1.318/styles/kendo.common.min.css" />
+  <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2014.1.318/styles/kendo.default.min.css" />
 
-  <a id="page-help_two" href="#/main" onclick="window.showModalDialog(this.href,window, 'width=1300,height=500'); return false;">what is new?</a>
+  <script src="https://kendo.cdn.telerik.com/2014.1.318/js/jquery.min.js"></script>
 
-  <button ng-click="openRef()">GetData</button>
+  <script src="https://kendo.cdn.telerik.com/2014.1.318/js/kendo.all.min.js"></script>
 
-  <span id="undo" class="k-button" ng-click="OpenWindow()">Click here to open the window.</span>
+</head>
+<body>
 
-  <span id="undo_" class="k-button">JQuery</span>
-  <span id="thecontent" class="k-button">Click here to Add content</span>
+<div id="window"></div>
 
-
-  <p>{{toSend.adr}}</p>
-
-
-</div>
-
-
-
+<span id="undo" class="k-button">Click here to open the window.</span>
+<span id="thecontent" class="k-button">Click here to Add content</span>
 
 <script>
   $(document).ready(function () {
 
     var mywindow = $("#window"),
       thecontent = $("#thecontent"),
-      undo = $("#undo_");
+      undo = $("#undo");
 
     undo.bind("click", function () {
       mywindow.data("kendoWindow").open();
@@ -73,3 +65,5 @@
 </script>
 
 
+</body>
+</html>

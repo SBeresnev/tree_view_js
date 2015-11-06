@@ -1,51 +1,70 @@
 'use strict';
 
-angular.module("treeViewApp").controller("TreeController",  function($scope) {
+angular.module("treeViewApp").controller("TreeController",  function($scope, $http, DOMAIN_) {
 
-	  this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+  $scope.mywindow = [];
 
-	  $scope.tool = "{ 'name': 'Pen'  'icon': 'icons/pen.png' }";
+  $scope.adrData = [];
 
-    $scope.tree = [{name: "Node", nodes: [{name: "Node1", nodes: []}]}];
+  $scope.url_ = DOMAIN_ + '/#/main';
 
-    $scope.hasClass = function (elem, className) { return new RegExp("(^|\\s)"+className+"(\\s|$)").test(elem.className) }
+  $scope.toSend = {address_id:'', adr_num: '', soato:'', adr :'' };
 
-    $scope.delete = function(data) {
-        data.nodes = [];
-    };
+  $scope.toSend_old = {address_id:'', adr_num: '', soato:'', adr :'' };
 
-    $scope.add = function(data) {
-        var post = data.nodes.length + 1;
-        var newName = data.name + '-' + post;
-        data.nodes.push({name: newName,nodes: []});
-    };
+  $scope.init = function() {
 
-	  $scope.tree_toggle = function () {
 
-        var clickedElem = event.target || event.srcElement
-
-        if (clickedElem.className.search('Expand')== -1) {
-                return // клик не там
-        }
-
-        // Node, на который кликнули
-        var node = clickedElem.parentNode
-        /*
-        if (node.className.search('ExpandLeaf') == -1) {
-                return // клик на листе
-        }*/
-
-        // определить новый класс для узла
-        var newClass = node.className.search('ExpandOpen') >=0 ? 'ExpandClosed' : 'ExpandOpen'
-        // заменить текущий класс на newClass
-        // регексп находит отдельно стоящий open|close и меняет на newClass
-        var re =  /(^|\s)(ExpandOpen|ExpandClosed)(\s|$)/
-        node.className = node.className.replace(re, '$1'+newClass+'$3')
   }
+
+  function modalWin() {
+    if (window.showModalDialog) {
+      window.showModalDialog("#/main","name", "dialogWidth:255px;dialogHeight:250px");
+    } else {
+      window.open('#/main','name','height=255,width=250,toolbar=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no ,modal=yes');
+    }
+  }
+
+  $scope.OpenWindow= function()  // custom function on click
+  {
+
+    sessionStorage.setItem("addObj",JSON.stringify([]));
+
+    $scope.DlgOptions = {
+      width: "1300px", height: "500px", modal: true,
+      actions: ["Custom", "Minimize", "Maximize", "Close"],
+      title: "Addresses"
+    };
+
+    $scope.window_.setOptions($scope.DlgOptions);
+
+    $scope.window_.center();  // open dailog in center of screen
+
+    $scope.window_.open();
+
+  };
+
+  $scope.onclick = function(){
+
+  }
+
+
+  $scope.openRef = function()
+    {
+
+       $scope.toSend = JSON.parse(sessionStorage.getItem("addObj"));
+
+     // $scope.toSend_old = JSON.parse(addressmsg.getfullAddressMsg());
+     // $scope.toSend.adr = localStorage.getItem("adr");
+     // $scope.toSend = $rootScope.toSend;
+     // addressmsg.getfullAddressMsg();
+     // var w = window.open(this.href, 'popupwindow', 'width=800,height=800');
+
+      return false;
+
+    }
+
+
 
 });
 

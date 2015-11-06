@@ -7,6 +7,7 @@
 }
 
 
+.wait * {cursor:wait}
 
 .br0 {
   border-radius: 0px !important;

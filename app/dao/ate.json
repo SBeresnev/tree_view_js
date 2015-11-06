@@ -1,12 +1,11 @@
 [
-  {
-  "ate_id"       :17030,
-  "ate_name"     :"г. Минск",
-  "parentate_id" :null,
-  "tree_ids"     :";17030",
-  "soato"        :"2000000000",
-  "parent_ate"   :"Республика Беларусь"
-  }
-]
+ {"ate_id":1,"ate_name":"Брестская обл.","parentate_id":null,"tree_ids":";1;","soato":"1000000000","parent_ate":null},
+ {"ate_id":2464,"ate_name":"Витебская обл.","parentate_id":null,"tree_ids":";2464;","soato":"2000000000","parent_ate":null},
+ {"ate_id":9397,"ate_name":"Гомельская обл.","parentate_id":null,"tree_ids":";9397;","soato":"3000000000","parent_ate":null},
+ {"ate_id":12380,"ate_name":"Гродненская обл.","parentate_id":null,"tree_ids":";12380;","soato":"4000000000","parent_ate":null},
+ {"ate_id":17041,"ate_name":"Минская обл.","parentate_id":null,"tree_ids":";17041;","soato":"6000000000","parent_ate":null},
+ {"ate_id":22672,"ate_name":"Могилевская обл.","parentate_id":null,"tree_ids":";22672;","soato":"7000000000","parent_ate":null},
+ {"ate_id":17030,"ate_name":"г. Минск","parentate_id":null,"tree_ids":";17030;","soato":"5000000000","parent_ate":null}
 
+]
 

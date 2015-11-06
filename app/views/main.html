@@ -1,47 +1,51 @@
-<div id="example" ng-init="init()" >
+<div id="AddressID" ng-init="init()" >
 
   <div class="row page-header form-group" >
 
     <label class="control-label col-sm-2"> Адрес: </label>
 
-    <div class="col-sm-8"> <input type="text " class="form-control" placeholder="Адрес" ng-init="var.nameAte = ''" ng-model="var.curAte.ate_name" disabled/> </div>
+    <div class="col-sm-8"> <input type="text " class="form-control" placeholder="Адрес" ng-init="var.nameAte = ''" ng-value="var.curAte.ate_name +' ' + var.fullStr" disabled/> </div>
 
-    <div class="col-sm-2"> <span class="input-group-btn"> <button class="btn btn-default form-control"  ng-click="searchAte(var.nameAte)"> Привязать </button> </span> </div>
+    <div class="col-sm-2"> <span class="input-group-btn"> <button class="btn btn-default form-control"  ng-click="bind()"> Привязать </button> </span> </div>
 
   </div>
 
+
   <div class="row">
 
-   <div class="col-sm-1">
 
-       <ul class="nav" ng-model="AteForm" ng-init="AteForm=true">
+    <div class="col-sm-2 container">
 
-         <li><a href="" ng-click ="AteForm=false" > АТЕ </a></li>
+      <ul class="nav list-group" ng-model="AteForm" ng-init="AteForm=true">
 
-         <li><a href="" ng-click ="AteForm=true" > Улица </a></li>
+        <li><a href="" class="list-group-item active " ng-click ="cleanDataSearches(); AteForm=true; StreetForm=false; strTabShow=false; prclTabShow = false " > АТЕ </a></li>
 
-       </ul>
+        <li><a href="" class="list-group-item " ng-click ="cleanDataSearches(); AteForm=false; StreetForm=true; ateTabShow=false; prclTabShow = false " > Кап. строение <wbr> Изолир. помещение </a></li>
 
-     </div>
+        <li><a href="" class="list-group-item" ng-click ="cleanDataSearches(); AteForm=false; StreetForm=false; ateTabShow=false; strTabShow=false" > Земельный участок </a></li>
+
+      </ul>
+
+    </div>
 
 
     <!--ATE form-->
 
-   <div class = "container" ng-hide = "AteForm">
+   <div  id="AteSearchID" class = "container  col-sm-10" ng-hide = "!AteForm">
 
      <!--Search ATE form block-->
 
-     <div class="well row container col-sm-7">
+     <div class="well container  col-sm-8">
 
-       <div class="input-group">
+       <div class="input-group ">
 
-         <input type="text " class="form-control" placeholder="АТЕ search" ng-keyup=" $event.keyCode == 13 ?  searchAte(var.nameAte) : TabShow=false "  ng-init="var.nameAte = ''" ng-model="var.nameAte" />
+         <input type="text " class="form-control" placeholder="АТЕ search" ng-keyup=" $event.keyCode == 13 ?  searchAte() : ateTabShow=false"  ng-init="var.ateForm.nameAte = ''" ng-model="var.ateForm.nameAte" />
 
-         <span class="input-group-btn"> <button class="btn btn-default"  ng-click="searchAte(var.nameAte)"> Поиск </button> </span>
+         <span  class="input-group-btn"> <button  class="btn btn-default btn-primary"  ng-click="searchAte()"> Поиск </button> </span>
 
        </div>
 
-       <table class="table table-bordered" ng-hide="!TabShow">
+       <table class="table table-bordered" ng-hide="!ateTabShow">
 
           <tr>
 
@@ -53,7 +57,7 @@
 
           </tr>
 
-          <tr ng-repeat="ate in var.ateDataSearch" class="btn-default" ng-click="bindAte(ate)">
+          <tr ng-repeat="ate in var.ateDataSearch " class="btn-default" ng-click="bindAte(ate)">
 
             <td >{{$index +1}}</td>
 
@@ -73,7 +77,7 @@
 
      <div class="well k-content col-sm-4">
 
-        <a href="" ng-click="cleanAte()"> <label> Вся Беларусь </label> </a>
+        <a href="" ng-click="cleanAll()"> <label> Вся Беларусь </label> </a>
 
         <div kendo-tree-view="tree"  k-data-source="var.treeData" k-on-change="selectedItem = dataItem">
 
@@ -87,24 +91,36 @@
 
    </div>
 
+    <!--ATE end form-->
+
 
     <!--Street form-->
 
-   <div class = "container" ng-hide = "!AteForm">
+   <div  id="StreetSearchID" class = "container col-sm-10" ng-hide = "!StreetForm" >
 
-     <div class="input-group row">
 
-       <div class="col-sm-4"> <input type="text" class="form-control" placeholder="Улица" ng-init="var.curStreet = ''" ng-model="var.curStreet" /> </div>
 
-       <div class="col-sm-2"> <input type="number" class="form-control" placeholder="Дом" ng-init="var.curHouse = ''" ng-model="var.curHouse" /> </div>
+     <div class="well row">
 
-       <div class="col-sm-2"> <input type="number" class="form-control " placeholder="Корпус" ng-init="var.curCorp = ''" ng-model="var.curCorp" /> </div>
+      <span class="input-group-btn"> <button class="btn btn-large btn-block btn-primary" ng-click="searchStreet(); strTabShow = true" > Поиск </button> </span>
 
-       <div class="col-sm-2"> <input type="number" class="form-control " placeholder="Квартира" ng-init="var.curRoom = ''" ng-model="var.curRoom" /> </div>
+     </div>
 
-       <span class="input-group-btn col-sm-5"> <button class="btn btn-default"  ng-click="searchStreet(var.nameAte)"> Поиск </button> </span>
+     <div class="input-group well row">
 
-       <table class="table table-bordered">
+       <div class="col-sm-3"> <input type="text" class="form-control" placeholder="Улица" ng-model="var.streetForm.street_name" /> </div>
+
+       <div class="col-sm-2"> <input type="number" class="form-control" placeholder="Дом" ng-model="var.streetForm.house_num" /> </div>
+
+       <div class="col-sm-2"> <input type="number" class="form-control " placeholder="Корпус"  ng-model="var.streetForm.corp_num" /> </div>
+
+       <div class="col-sm-2"> <input type="number" class="form-control " placeholder="Квартира"  ng-model="var.streetForm.room_num" /> </div>
+
+       <div class="col-sm-3"> <select class="form-control col-sm-2" required="required"  ng-model="var.curObjPlace" ng-options="c.code_short_name for c in var.objPlaceDict"> </select> </div>
+
+       <!--ng-click="searchStreet(); strTabShow = true" -->
+
+       <table class="table table-bordered"  ng-hide="!strTabShow">
 
          <tr>
 
@@ -112,16 +128,17 @@
 
            <th>Улица</th>
 
-           <th>Дом/Корпус-Кварта</th>
+           <th>Дом/Корпус-Квартира</th>
 
          </tr>
 
-         <tr ng-repeat="ate in var.ateDataSearch" class="btn-default" ng-click="bindAte(ate)">
+         <tr ng-repeat="street in var.streetDataSearch  | filter: var.streetForm.street_name" class="btn-default" ng-click="bindStreet(street)">
 
            <td >{{$index +1}}</td>
 
-           <td width="fit-content">{{ate.parent_ate}}</td>
-           <td width="fit-content">{{ate.soato}}</td>
+           <td width="fit-content">{{street.elementName}}</td>
+
+           <td width="fit-content">{{getFormat(street)}}</td>
 
          </tr>
 
@@ -129,11 +146,70 @@
 
      </div>
 
-
    </div>
+
+   <!--Street end form-->
+
+
+    <!--Parcel form  -->
+
+    <div  id="ParcelSearchID" class = "container col-sm-10" ng-hide = "AteForm||StreetForm" >
+
+      <div class="input-group well row">
+
+        <div class="col-sm-4"> <input type="text" class="form-control" placeholder="Улица" ng-model="var.parcelForm.street_name" /> </div>
+
+        <div class="col-sm-2"> <input type="number" class="form-control" placeholder="Дом" ng-model="var.parcelForm.house_num" /> </div>
+
+        <div class="col-sm-5"> <select class="form-control" required="required"  ng-model="var.curObjPlace" ng-options="c.code_short_name for c in var.objPlaceDict"> </select> </div>
+
+        <span class="input-group-btn col-sm-4 "> <button class="btn btn-default btn-primary"  ng-click="searchParcel(); prclTabShow = true " > Поиск </button> </span>
+
+        <!--ng-click="searchStreet(); strTabShow = true" -->
+
+        <table class="table table-bordered"  ng-hide="!prclTabShow">
+
+          <tr>
+
+            <th>Номер</th>
+
+            <th>Улица</th>
+
+            <th>Дом</th>
+
+            <th>lCoord</th>
+
+            <th>bCoord</th>
+
+
+          </tr>
+
+          <tr ng-repeat="parcel in var.parcelDataSearch | filter: var.parcelForm.street_name " class="btn-default" ng-click="bindParcel(parcel)">
+
+            <td >{{$index +1}}</td>
+
+            <td width="fit-content">{{parcel.elementName}}</td>
+
+            <td width="fit-content">{{getFormat(parcel)}}</td>
+
+            <td width="fit-content">{{parcel.lCoord}}</td>
+
+            <td width="fit-content">{{parcel.bCoord}}</td>
+
+          </tr>
+
+        </table>
+
+      </div>
+
+    </div>
+
+    <!--Parcel end form -->
 
   </div>
 
 </div>
+
+
 
 

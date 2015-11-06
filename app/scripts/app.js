@@ -8,6 +8,7 @@
  *
  * Main module of the application.
  */
+
 var app = angular.module('treeViewApp', [
     'ngAnimate',
     'ngCookies',
@@ -15,9 +16,11 @@ var app = angular.module('treeViewApp', [
     'ngRoute',
     'ngSanitize',
     'ngTouch',
+    'angularBootstrapNavTree',
 	  'kendo.directives'
     ])
 	.constant('DOMAIN', "" + window.location.protocol + '//'+ window.location.hostname+":8080")
+  .constant('DOMAIN_', "" + window.location.protocol + '//'+ window.location.hostname+":9000")
     .config(function ($routeProvider, $httpProvider) {
         $routeProvider
 		.when('/main', {
