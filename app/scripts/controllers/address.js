@@ -6,7 +6,7 @@ angular.module("treeViewApp").controller("TreeController",  function($scope, $ht
 
   $scope.adrData = [];
 
-  $scope.url_ = DOMAIN_ + '/#/main';
+  $scope.url_ = DOMAIN_ + '//#/main';
 
   $scope.toSend = {address_id:'', adr_num: '', soato:'', adr :'' };
 
