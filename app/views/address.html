@@ -1,75 +1,73 @@
 
-<div class="container" ng-init="init()">
+<style>
 
-<div id="window" ></div>
+  .dropdown-scroll {
+    overflow: auto;
+    height: 90px;
+  }
+  .mypanel {
+    max-width: 400px;
+    margin-top:15px;
+  }
+
+.wrap-dd-select {
+text-align: center;
+/* align-self: center; */
+position: relative;
+width: 200px;
+height: 30px;
+margin: auto;
+padding: 0;
+-webkit-user-select: none;
+-moz-user-select: none;
+user-select: none;
+background: #fff;
+border-radius: 0px;
+border: 1px solid rgba(0,0,0,0.15);
+box-shadow: 0 1px 1px rgba(50,50,50,0.1);
+cursor: pointer;
+outline: none;
+font-weight: bold;
+color: #8AA8BD;
+}
+</style>
+
+<div>
 
 
-  <div kendo-window="window_" k-visible="false" k-modal="true" k-on-close="closeAddress()" k-content="{url: '{{url_}}'}"> </div>
 
+  <div style="width:250px;margin-left:100px;background:whitesmoke;border:1px solid lightgray;border-radius:5px;">
+    <span ng-if="doing_async">...loading...</span>
+    <abn-tree tree-data="my_data" tree-control="my_tree" on-select="my_tree_handler(branch)" expand-level="2" initial-selection="Granny Smith"></abn-tree>
+  </div>
 
-  <a id="page-help" href="#/main" onclick="window.open(this.href, 'popupwindow', 'width=1300,height=500,modal=yes'); return false;">what is this?</a>
+  <p>You have selected: {{ddSelectSelected}}</p>
 
-  <a id="page-help_two" href="#/main" onclick="window.showModalDialog(this.href,window, 'width=1300,height=500'); return false;">what is new?</a>
+  <!--div class="form-group col-sm-10">
+    <h2>Split Buttons</h2>
 
-  <button ng-click="openRef()">GetData</button>
+      <div class = "row input-group">
+        <span class = "input-group-addon">@</span>
+        <div class="col-sm-3" dropdown-select="ddSelectOptions" dropdown-model="ddSelectSelected" > <input type = "text" class = "form-control" placeholder = "Twitterhandle"> </div>
+        <input class="col-sm-3" type = "text" class = "form-control" placeholder = "Twitterhandle">
+      </div>
+  </div-->
 
-  <span id="undo" class="k-button" ng-click="OpenWindow()">Click here to open the window.</span>
+  <div class="container">
+    <div class="panel panel-default mypanel">
+      <div class="panel-heading">
+        <h3 class="panel-title">Choose a Service Level</h3>
+      </div>
+      <div class="panel-body">
+        <form class="form">
+          <bootstrap-dropdown data-field-label="Level" data-ng-model="form.serviceLevelName" data-placeholder="Service Level" data-dropdown-data="servicesData"></bootstrap-dropdown>
 
-  <span id="undo_" class="k-button">JQuery</span>
-  <span id="thecontent" class="k-button">Click here to Add content</span>
+        </form>
+        <pre>Chosen Value : {{form.serviceLevelName}}</pre>
+      </div>
+    </div>
 
-
-  <p>{{toSend.adr}}</p>
+  </div>
 
 
 </div>
-
-
-
-
-<script>
-  $(document).ready(function () {
-
-    var mywindow = $("#window"),
-      thecontent = $("#thecontent"),
-      undo = $("#undo_");
-
-    undo.bind("click", function () {
-      mywindow.data("kendoWindow").open();
-      //undo.hide();
-    }); // END UNDO
-
-    thecontent.bind("click", function () {
-      mywindow.data("kendoWindow").refresh("http://localhost:9000/#/main");
-      //thecontent.hide();
-    }); // END thecontent
-
-
-    //
-    if (!mywindow.data("kendoWindow")) {
-      mywindow.kendoWindow({
-
-        width: "1300px",
-        height: "500px",
-        modal: true,
-        actions: ["Custom", "Minimize", "Maximize", "Close"],
-        title: "Addresses",
-        iframe: true,
-        visible: false,
-        content: "http://localhost:9000/#/main",
-        close: function () {
-          mywindow.data("kendoWindow").title("Addresses");
-          //this.destroy();
-        },
-        custom: function () {
-          undo.hide();
-        }
-      });
-    }
-    //
-
-
-  });     // End Ready
-</script>
-
-
