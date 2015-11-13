@@ -34,8 +34,6 @@ color: #8AA8BD;
 
 <div>
 
-
-
   <div style="width:250px;margin-left:100px;background:whitesmoke;border:1px solid lightgray;border-radius:5px;">
     <span ng-if="doing_async">...loading...</span>
     <abn-tree tree-data="my_data" tree-control="my_tree" on-select="my_tree_handler(branch)" expand-level="2" initial-selection="Granny Smith"></abn-tree>
@@ -52,6 +50,12 @@ color: #8AA8BD;
         <input class="col-sm-3" type = "text" class = "form-control" placeholder = "Twitterhandle">
       </div>
   </div-->
+
+  <div class="btn-group" ng-init="class='btn btn-success'; no_class='btn btn-default'">
+    <button type="button" ng-class="class" ng-click="pr_class = class; class = no_class; no_class = pr_class">По объекту</button>
+    <button type="button" ng-class="no_class" ng-click="pr_class = class; class = no_class; no_class = pr_class">По субъекту</button>
+  </div>
+
 
   <div class="container">
     <div class="panel panel-default mypanel">
