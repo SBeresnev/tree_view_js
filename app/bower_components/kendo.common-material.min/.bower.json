@@ -1,0 +1,15 @@
+{
+  "name": "kendo.common-material.min",
+  "_cacheHeaders": {
+    "ETag": "\"560bf89c-412de\"",
+    "Last-Modified": "Wed, 30 Sep 2015 14:58:36 GMT",
+    "Content-Length": "266974",
+    "Content-Type": "text/css"
+  },
+  "_release": "e-tag:560bf89c-",
+  "main": "index.css",
+  "_source": "http://kendo.cdn.telerik.com/2015.3.930/styles/kendo.common-material.min.css",
+  "_target": "*",
+  "_originalSource": "http://kendo.cdn.telerik.com/2015.3.930/styles/kendo.common-material.min.css",
+  "_direct": true
+}
